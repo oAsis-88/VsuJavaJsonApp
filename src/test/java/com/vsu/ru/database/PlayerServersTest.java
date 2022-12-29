@@ -26,7 +26,7 @@ public class PlayerServersTest extends ServersAbstractTest<Player, Long>{
     public void createAndReadTest() throws IOException {
         //остальное тестить нет особого смысла так как только здесь будет каскадное удаление и тд
         //так как чтение уже работает, можем прочитать из файла
-        List<Player> players = playerService.readListFromFile("players.json");
+        List<Player> players = playerService.readListFromFile("src/main/resources/players.json");
         //возьмем первого игрока
         Player player = players.get(0);
         //сохраним его

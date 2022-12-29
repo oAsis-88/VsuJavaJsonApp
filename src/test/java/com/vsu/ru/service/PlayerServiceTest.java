@@ -16,7 +16,7 @@ public class PlayerServiceTest{
 
     @Test
     public void readTest() throws IOException {
-        List<Player> players = playerService.readListFromFile("players.json");
+        List<Player> players = playerService.readListFromFile("src/main/resources/players.json");
         Player player = players.get(0);
         System.out.println(player.getPlayerId());
         assertEquals(10000, players.size());
@@ -26,7 +26,7 @@ public class PlayerServiceTest{
     // НО зато этот тест "грубо говоря окончательны", он скажет , что все работает так, как надо
     //А, вообще, я думаю это можно оптимизировать
     public void readAndSaveTest() throws IOException {
-        List<Player> players = playerService.readListFromFile("players.json");
+        List<Player> players = playerService.readListFromFile("src/main/resources/players.json");
         playerService.create(players);
         List<Player> playersFromDb = playerService.getAll();
         assertEquals(playersFromDb.size(), players.size());
@@ -39,7 +39,7 @@ public class PlayerServiceTest{
     // НО зато этот тест "грубо говоря окончательны", он скажет , что все работает так, как надо
     //А, вообще, я думаю это можно оптимизировать
     public void readAndSaveTestFirstTen() throws IOException {
-        List<Player> players = playerService.readListFromFile("first_ten.json");
+        List<Player> players = playerService.readListFromFile("src/main/resources/first_ten.json");
         playerService.create(players);
         List<Player> playersFromDb = playerService.getAll();
         assertEquals(playersFromDb.size(), players.size());
@@ -49,9 +49,9 @@ public class PlayerServiceTest{
     @SneakyThrows
     @Test
     public void writeToFileTest(){
-        List<Player> players = playerService.readListFromFile("players.json");
+        List<Player> players = playerService.readListFromFile("src/main/resources/players.json");
         List<Player> firstTen = players.subList(0, 10);
-        playerService.writeToFile("first_ten.json", firstTen);
+        playerService.writeToFile("src/main/resources/first_ten.json", firstTen);
     }
 
 
