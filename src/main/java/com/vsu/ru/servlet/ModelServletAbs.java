@@ -39,17 +39,22 @@ public abstract class ModelServletAbs <K, T extends DataBaseItem<K>> extends Htt
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        String stringPlayer = readDataFromRequest(req);
-        String requestURI = req.getRequestURI();
-        String[] split = requestURI.split("/");
-        if(split.length != 3){
-            resp.sendError(400);
-        }else{
-            K id = getModelService().getIdFromString(split[2]);
-            T one = getModelService().convertFromString(stringPlayer);
-            one.setId(id);
-            getModelService().create(one);
+        try{
+            String stringPlayer = readDataFromRequest(req);
+            String requestURI = req.getRequestURI();
+            String[] split = requestURI.split("/");
+            if(split.length != 3){
+                resp.sendError(400);
+            }else{
+                K id = getModelService().getIdFromString(split[2]);
+                T one = getModelService().convertFromString(stringPlayer);
+                one.setId(id);
+                getModelService().create(one);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
+
     }
 
     @Override

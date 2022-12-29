@@ -23,7 +23,7 @@ public abstract class ModelServiceAbs<K, T extends DataBaseItem<K>> implements M
     @Override
     public List<T> readListFromFile(String pathToFile) {
         InputStream resourceAsStream = getClass().getClassLoader().getResourceAsStream(pathToFile);
-        return objectMapper.readValue(resourceAsStream, new TypeReference<List<T>>() {});
+        return objectMapper.readValue(resourceAsStream, getTypeReference());
     }
 
     @SneakyThrows
@@ -77,43 +77,43 @@ public abstract class ModelServiceAbs<K, T extends DataBaseItem<K>> implements M
     @SneakyThrows
     @Override
     public T convertFromString(String string) {
-        return objectMapper.readValue(string, new TypeReference<T>(){});
+        return objectMapper.readValue(string, getDataBaseItemClass());
     }
 
     @SneakyThrows
     @Override
     public List<T> convertAllFromString(String string) {
-        return objectMapper.readValue(string, new TypeReference<List<T>>() {});
+        return objectMapper.readValue(string, getTypeReference());
     }
 
     @Override
     public void create(List<T> list) {
-        getDataBaseAbstractServers().saveOrUpdateAll(list);
+        getDataBaseAbstractDao().saveOrUpdateAll(list);
     }
 
     @Override
     public void create(T value) {
-        getDataBaseAbstractServers().saveOrUpdate(value);
+        getDataBaseAbstractDao().saveOrUpdate(value);
     }
 
     @Override
     public List<T> getAll() {
-        return getDataBaseAbstractServers().readAll();
+        return getDataBaseAbstractDao().readAll();
     }
 
     @Override
     public T getById(K id) {
-        return getDataBaseAbstractServers().read(id);
+        return getDataBaseAbstractDao().read(id);
     }
 
     @Override
     public void deleteAll() {
-        getDataBaseAbstractServers().deleteAll();
+        getDataBaseAbstractDao().deleteAll();
     }
 
     @Override
     public void deleteById(K id) {
-        getDataBaseAbstractServers().delete(id);
+        getDataBaseAbstractDao().delete(id);
     }
 
     @Override
@@ -121,5 +121,7 @@ public abstract class ModelServiceAbs<K, T extends DataBaseItem<K>> implements M
         ids.forEach(this::deleteById);
     }
 
-    protected abstract DataBaseAbstractDao<T, K> getDataBaseAbstractServers();
+    protected abstract DataBaseAbstractDao<T, K> getDataBaseAbstractDao();
+    protected abstract TypeReference<List<T>> getTypeReference();
+    protected abstract Class<T> getDataBaseItemClass();
 }
