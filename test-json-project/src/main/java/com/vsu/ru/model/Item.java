@@ -1,4 +1,4 @@
-package com.vsu.ru;
+package com.vsu.ru.model;
 
 
 import lombok.AllArgsConstructor;
@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Item implements DataBaseItem<Long>{
+public class Item implements DataBaseItem<Long> {
     private Long id;
     private Integer count;
     private Integer level;

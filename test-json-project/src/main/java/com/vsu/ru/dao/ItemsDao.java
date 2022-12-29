@@ -1,4 +1,6 @@
-package com.vsu.ru;
+package com.vsu.ru.dao;
+
+import com.vsu.ru.model.Item;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,7 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ItemsServers extends DataBaseAbstractServers<Item, Long>{
+public class ItemsDao extends DataBaseAbstractDao<Item, Long> {
 
     private static final String INSERT_ITEMS_SQL = "INSERT INTO items" +
             "  (id, count, level, resourceid) VALUES " +

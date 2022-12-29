@@ -1,11 +1,13 @@
-package com.vsu.ru;
+package com.vsu.ru.dao;
+
+import com.vsu.ru.model.DataBaseItem;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.List;
 
-public abstract class DataBaseAbstractServers<T extends DataBaseItem<K>, K> implements DataBaseServers<T, K>{
+public abstract class DataBaseAbstractDao<T extends DataBaseItem<K>, K> implements DataBaseDao<T, K> {
     private static final String url = "jdbc:postgresql://localhost:5432/vero_players";
     private static final String user = "postgres";
     private static final String password = "456852";

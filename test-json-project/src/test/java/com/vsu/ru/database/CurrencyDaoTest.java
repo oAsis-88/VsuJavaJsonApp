@@ -1,8 +1,8 @@
 package com.vsu.ru.database;
 
-import com.vsu.ru.CurrencyServers;
-import com.vsu.ru.DataBaseServers;
-import com.vsu.ru.Currency;
+import com.vsu.ru.dao.CurrencyDao;
+import com.vsu.ru.dao.DataBaseDao;
+import com.vsu.ru.model.Currency;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -10,11 +10,11 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-public class CurrencyServersTest extends ServersAbstractTest<Currency, Long>{
-    private final DataBaseServers<Currency, Long> currencyServers = new CurrencyServers();
+public class CurrencyDaoTest extends ServersAbstractTest<Currency, Long>{
+    private final DataBaseDao<Currency, Long> currencyServers = new CurrencyDao();
 
     @Override
-    protected DataBaseServers<Currency, Long> getServers() {
+    protected DataBaseDao<Currency, Long> getServers() {
         return currencyServers;
     }
 

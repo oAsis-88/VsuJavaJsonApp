@@ -1,4 +1,9 @@
-package com.vsu.ru;
+package com.vsu.ru.dao;
+
+import com.vsu.ru.model.Currency;
+import com.vsu.ru.model.Item;
+import com.vsu.ru.model.Player;
+import com.vsu.ru.model.Progress;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,15 +16,15 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public class PlayersServers extends DataBaseAbstractServers<Player, Long>{
-    private final ProgressServers progressServers;
-    private final CurrencyServers currencyServers;
-    private final ItemsServers itemsServers;
+public class PlayersDao extends DataBaseAbstractDao<Player, Long> {
+    private final ProgressDao progressServers;
+    private final CurrencyDao currencyDao;
+    private final ItemsDao itemsServers;
 
-    public PlayersServers(){
-        progressServers = new ProgressServers();
-        currencyServers = new CurrencyServers();
-        itemsServers = new ItemsServers();
+    public PlayersDao(){
+        progressServers = new ProgressDao();
+        currencyDao = new CurrencyDao();
+        itemsServers = new ItemsDao();
     }
 
 
@@ -89,10 +94,10 @@ public class PlayersServers extends DataBaseAbstractServers<Player, Long>{
         //и так же со всеми
         for(var s : newPlayer.getCurrencies().entrySet()){
             if(oldPlayerCurrencies.containsKey(s.getKey())){
-                currencyServers.update(connection, s.getValue());
+                currencyDao.update(connection, s.getValue());
                 oldPlayerCurrencies.remove(s.getKey());
             }else{
-               currencyServers.insert(connection, s.getValue());
+               currencyDao.insert(connection, s.getValue());
             }
         }
         for(var s : oldPlayerCurrencies.entrySet()){
@@ -131,7 +136,7 @@ public class PlayersServers extends DataBaseAbstractServers<Player, Long>{
         }
 
         for(var currency : newPlayer.getCurrencies().values()){
-            currencyServers.saveOrUpdate(currency);
+            currencyDao.saveOrUpdate(currency);
             if(!existsInPlayerCurrencyMap(connection, newPlayer.getPlayerId(), currency.getId())){
                 insertIntoPlayerCurrencyMap(connection, newPlayer.getPlayerId(), currency.getId());
             }
@@ -154,7 +159,7 @@ public class PlayersServers extends DataBaseAbstractServers<Player, Long>{
         progressServers.deleteAll();
         deleteAllFromPlayerCurrencyMap(connection);
         deleteAllFromPlayerItemMap(connection);
-        currencyServers.deleteAll();
+        currencyDao.deleteAll();
         itemsServers.deleteAll();
         connection.prepareStatement(DELETE_PLAYERS_SQL).executeUpdate();
     }

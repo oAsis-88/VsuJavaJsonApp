@@ -1,4 +1,4 @@
-package com.vsu.ru;
+package com.vsu.ru.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,7 +12,7 @@ import java.util.Map;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Player implements DataBaseItem<Long>{
+public class Player implements DataBaseItem<Long> {
     private Long playerId;
     private String nickname;
     private List<Progress> progresses;
@@ -22,5 +22,10 @@ public class Player implements DataBaseItem<Long>{
     @Override
     public Long getId() {
         return playerId;
+    }
+
+    @Override
+    public void setId(Long id) {
+        playerId = id;
     }
 }

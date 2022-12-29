@@ -1,4 +1,4 @@
-package com.vsu.ru;
+package com.vsu.ru.model;
 
 import lombok.*;
 

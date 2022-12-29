@@ -1,4 +1,6 @@
-package com.vsu.ru;
+package com.vsu.ru.dao;
+
+import com.vsu.ru.model.Progress;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,7 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProgressServers extends DataBaseAbstractServers<Progress, Long>{
+public class ProgressDao extends DataBaseAbstractDao<Progress, Long> {
 
     private static final String INSERT_PROGRESS_SQL = "INSERT INTO progresses" +
             "  (id, playerid, resourceid, score, maxscore) VALUES " +

@@ -1,4 +1,6 @@
-package com.vsu.ru;
+package com.vsu.ru.dao;
+
+import com.vsu.ru.model.Currency;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,7 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CurrencyServers extends DataBaseAbstractServers<Currency, Long>{
+public class CurrencyDao extends DataBaseAbstractDao<Currency, Long> {
     private static final String INSERT_CURRENCY_SQL = "INSERT INTO currencies" +
             "  (id, resourceid, name, count) VALUES " +
             " (?, ?, ?, ?);";
